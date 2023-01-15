@@ -17,6 +17,7 @@ export default function Signin() {
     };
 
     function authorization() {
+        console.log(signin)
         setloading(false)
         let send = postSignin(signin);
         send.then((ref) => {
@@ -33,32 +34,26 @@ export default function Signin() {
             <div className="limiter">
                 <div className="container-login100">
                     <div className="wrap-login100 p-t-190 p-b-30">
-                        <form className="login100-form validate-form">
+                        <form className="login100-form">
                             <div className="login100-form-avatar">
-                                <img src={logo} alt="AVATAR"/>
+                                <img src={logo} alt="AVATAR" />
                             </div>
-                           
-                            <div className="wrap-input100 validate-input m-b-10 alert-validate" data-validate="Username is required">
-                                <input className="input100" type="text" name="username" placeholder="CPF"></input>
-                                    <span className="focus-input100"></span>
-                                    <span className="symbol-input100">
-                                        <i className="fa fa-user"></i>
-                                    </span>
+
+                            <div className="wrap-input100  m-b-10 " >
+                                <input className="input100" type="text" name="cpf" placeholder="CPF" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}></input>
+
                             </div>
-                            <div className="wrap-input100 validate-input m-b-10 alert-validate" data-validate="Password is required">
-                                <input className="input100" type="password" name="pass" placeholder="SENHA" ></input>
-                                    <span className="focus-input100"></span>
-                                    <span className="symbol-input100">
-                                        <i className="fa fa-lock"></i>
-                                    </span>
+                            <div className="wrap-input100  m-b-10" >
+                                <input className="input100" type="password" name="password" placeholder="SENHA" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}></input>
+
                             </div>
-                            <div onClick={()=>alert("oi")} className="container-login100-form-btn p-t-10">
-                                <button  className="login100-form-btn">
+                            <div onClick={() => {authorization()}} className="container-login100-form-btn login100-form-btn">
+                               
                                     Login
-                                </button>
+                              
                             </div>
-                           
-                            
+
+
                         </form>
                     </div>
                 </div>
