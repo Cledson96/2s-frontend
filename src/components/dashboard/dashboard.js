@@ -450,7 +450,7 @@ export default function Dashboard() {
 
                         </section>
 
-                        {/* <section class="col-lg-5 connectedSortable">
+                        <section class="col-lg-5 connectedSortable">
 
 
                             <div class="card bg-gradient-primary">
@@ -471,7 +471,7 @@ export default function Dashboard() {
 
                                 </div>
                                 <div class="card-body">
-                                    <div id="world-map" style="height: 250px; width: 100%;"></div>
+                                    <div id="world-map" style={{height: "250px", width: "100%"}}></div>
                                 </div>
 
                                 <div class="card-footer bg-transparent">
@@ -513,7 +513,7 @@ export default function Dashboard() {
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                    <canvas class="chart" id="line-chart" style={{minHeight: "250px", height: "250px", maxHeight: "250px", maxWwidth: "100%"}}></canvas>
                                 </div>
 
                                 <div class="card-footer bg-transparent">
@@ -578,12 +578,12 @@ export default function Dashboard() {
 
                                 <div class="card-body pt-0">
 
-                                    <div id="calendar" style="width: 100%"></div>
+                                    <div id="calendar" style={{width: "100%"}}></div>
                                 </div>
 
                             </div>
 
-                        </section> */}
+                        </section>
 
                     </div>
 
