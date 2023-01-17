@@ -3,7 +3,8 @@ import Navbar from "../../components/navbar/navbar"
 import { useEffect, useState } from 'react';
 import { getUsers } from "../../request/request";
 import { useNavigate } from 'react-router-dom'
-import {Helmet} from "react-helmet";
+import Dashboard from "../../components/dashboard/dashboard";
+
 
 
 
@@ -32,6 +33,7 @@ export default function Home() {
         <>
         <Headers user={user} setnavbar={setnavbar} navbar={navbar} />
            {navbar===true?<Navbar user={user} />:<></>} 
+           <Dashboard></Dashboard>
            
         </>
     )
