@@ -170,7 +170,7 @@
     font: normal normal normal 14px/1 FontAwesome;
     font-size: inherit;
     text-rendering: auto;
-   
+
 }
 
 
@@ -199,7 +199,7 @@
 
 .login100-form-btn {
     font-family: Montserrat-Bold;
-    font-size: 15px;
+    font-size: 20px;
     line-height: 1.5;
     color: #e0e0e0;
     width: 100%;
@@ -222,11 +222,11 @@
 }
 
 .login100-form-btn:hover {
-        
+
     content: "";
     display: flex;
     z-index: -1;
-  
+
     background: #005bea;
     background: -webkit-linear-gradient(left, #005bea, #00c6fb);
     background: -o-linear-gradient(left, #005bea, #00c6fb);
@@ -236,5 +236,8 @@
     -o-transition: all .4s;
     -moz-transition: all .4s;
     transition: all .4s;
-
+}
+.gif{
+    width: 50%;
+    height: 40px;
 }

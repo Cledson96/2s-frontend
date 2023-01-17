@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { postSignin } from '../../request/request.js'
 import { useState } from 'react';
 import logo from '../../img/logo.png'
+import loadimg from '../../img/carregando.gif'
 
 export default function Signin() {
     const [signin, setsignin] = useState({});
@@ -17,13 +18,11 @@ export default function Signin() {
     };
 
     function authorization() {
-        console.log(signin)
         setloading(false)
         let send = postSignin(signin);
         send.then((ref) => {
             localStorage.setItem("token", ref.data.token);
-            localStorage.setItem("name_signin", ref.data.name);
-            navigate('/home')
+            navigate('/')
         })
         send.catch((ref) => { setloading(true); alert(ref.response.data) })
 
@@ -47,10 +46,8 @@ export default function Signin() {
                                 <input className="input100" type="password" name="password" placeholder="SENHA" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}></input>
 
                             </div>
-                            <div onClick={() => {authorization()}} className="container-login100-form-btn login100-form-btn">
-                               
-                                    Login
-                              
+                            <div onClick={() => { authorization() }} className="container-login100-form-btn login100-form-btn">
+                                {loading === true ? "Entrar" : <img className='gif' alt='gif' src={loadimg} />}
                             </div>
 
 
