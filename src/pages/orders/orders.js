@@ -1,17 +1,15 @@
 import Headers from "../../components/headers/headers"
 import Navbar from "../../components/navbar/navbar"
+import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import { getUsers } from "../../request/request";
-import { useNavigate } from 'react-router-dom'
-import Dashboard from "../../components/dashboard/dashboard";
 
-export default function Home() {
-
+export default function Orders() {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
-  
+
     const [user, setuser] = useState("loading");
-    const [navbar,setnavbar] = useState(true)
+    const [navbar, setnavbar] = useState(true);
 
     useEffect(() => {
         const answer = getUsers(token);
@@ -22,14 +20,11 @@ export default function Home() {
             }
         })
     }, [])
-
-
     return (
         <>
-        <Headers user={user} setnavbar={setnavbar} navbar={navbar} />
-           {navbar===true?<Navbar user={user} />:<></>} 
-           <Dashboard></Dashboard>
-           
+            <Headers user={user} setnavbar={setnavbar} navbar={navbar} />
+            {navbar === true ? <Navbar user={user} /> : <></>}
         </>
     )
+
 }

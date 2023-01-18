@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const BASE_URL = 'https://api-sistema-2s.onrender.com';
 
+
 export function postSignin(body) {
   const promise = axios.post(`${BASE_URL}/signin`, body);
   return promise;
@@ -13,5 +14,10 @@ export function getUsers(authorization) {
       authorization
     }
   });
+  return promise;
+}
+
+export function postMotoboys(body) {
+  const promise = axios.post(`${BASE_URL}/signup_motoboys`, body);
   return promise;
 }
