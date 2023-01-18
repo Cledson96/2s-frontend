@@ -21,3 +21,8 @@ export function postMotoboys(body) {
   const promise = axios.post(`${BASE_URL}/signup_motoboys`, body);
   return promise;
 }
+
+export function postUsers(body) {
+  const promise = axios.post(`${BASE_URL}/signup_users`, body);
+  return promise;
+}

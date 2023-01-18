@@ -8,12 +8,12 @@ export function Confirmation({ setmodal }) {
       style={{ display: 'block', position: 'fixed' }}
     >
       <Modal.Dialog>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className='bg-success'>
           <Modal.Title>Colaborador cadastrado com sucesso!</Modal.Title>
         </Modal.Header>
 
-        <Modal.Footer>
-          <button onClick={() => { setmodal(false) }} type="button" class="btn  btn-success">OK</button>
+        <Modal.Footer className='bg-success'>
+          <button onClick={() => { setmodal(false) }} type="button" class="btn  btn-light">OK</button>
         </Modal.Footer>
       </Modal.Dialog>
     </div>
@@ -21,7 +21,7 @@ export function Confirmation({ setmodal }) {
 }
 
 export function Error({ seterror, dataerror }) {
-  console.log(dataerror)
+
   return (
     <div
       className="modal show "
@@ -32,7 +32,11 @@ export function Error({ seterror, dataerror }) {
           <Modal.Title>Erro ao cadastrar!</Modal.Title>
         </Modal.Header>
         <Modal.Body className='bg-danger'>
-          {dataerror == "motoboy já cadastrado!"?"motoboy já cadastrado!" : dataerror.map((ref) => {
+          {dataerror == "motoboy já cadastrado!"?"motoboy já cadastrado!" : "usuario já cadastrado"?"usuario já cadastrado": dataerror.map((ref) => {
+            return( <p>{ref}</p>)
+           
+          })}
+            {dataerror == "usuario já cadastrado!"?"usuario já cadastrado!" : dataerror.map((ref) => {
             return( <p>{ref}</p>)
            
           })}

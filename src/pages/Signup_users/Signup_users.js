@@ -2,11 +2,11 @@ import Headers from "../../components/headers/headers"
 import Navbar from "../../components/navbar/navbar"
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react';
-import { postMotoboys ,getUsers} from "../../request/request";
+import { postUsers ,getUsers} from "../../request/request";
 import {Confirmation,Error} from "../../components/modal/modal";
 
 
-export default function Signup_motoboy() {
+export default function Signup_users() {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
 
@@ -33,11 +33,11 @@ export default function Signup_motoboy() {
           itemvalues: [{}]
         });
       };
-    function motoboys(){
+    function users(){
         console.log(data)
-        const post = postMotoboys(data)
+        const post = postUsers(data)
         post.then(()=> {setmodal(true);setdata({});handleReset()});
-        post.catch((ref)=> {console.log(ref);if(ref.response.data==="motoboy já cadastrado!"){setdataerror(ref.response.data);seterror(true)}else{let err=ref.response.data.details.map((refe)=>{return (
+        post.catch((ref)=> {console.log(ref);if(ref.response.data==="usuario já cadastrado!"){setdataerror(ref.response.data);seterror(true)}else{let err=ref.response.data.details.map((refe)=>{return (
             refe.context.label + " é obrigatorio!"
         )});setdataerror(err);seterror(true)};})
     }
@@ -63,12 +63,12 @@ export default function Signup_motoboy() {
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Cadastro de motoboy</h1>
+                                <h1>Cadastro de usuarios</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active">Cadastro motoboy</li>
+                                    <li class="breadcrumb-item active">Cadastro usuario</li>
                                 </ol>
                             </div>
                         </div>
@@ -103,12 +103,12 @@ export default function Signup_motoboy() {
                                     </div>
                                     <div className="row">
                                         <div class="form-group" style={{ minWidth: "70px", marginRight: "35px" }}>
-                                            <label for="inputStatus">Utilitario</label>
-                                            <select name="utility" id="inputStatus" class="form-control custom-select" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}>
+                                            <label for="inputStatus">Acesso</label>
+                                            <select name="acess" id="inputStatus" class="form-control custom-select" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}>
                                                 <option selected disabled>Selecione</option>
-                                                <option>Moto</option>
-                                                <option>Carro</option>
-                                                <option>Bicicleta</option>
+                                                <option>Total</option>
+                                                <option>Parcial</option>
+                                              
                                             </select>
                                         </div>
                                         <div class="form-group" style={{ minWidth: "150px" }}>
@@ -141,7 +141,7 @@ export default function Signup_motoboy() {
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
-                                            <input onClick={() => motoboys()} type="submit" value="Cadastrar novo motoboy" class="btn btn-success float-right" />
+                                            <input onClick={() => users()} type="submit" value="Cadastrar novo usuario" class="btn btn-success float-right" />
                                         </div>
                                         
                                     </div>

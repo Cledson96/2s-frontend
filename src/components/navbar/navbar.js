@@ -59,13 +59,14 @@ export default function Navbar({ user }) {
 
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link">
+              <Link className='nav-link' to={"/signup_users"}>
                 <i className="nav-icon fas fa-user"></i>
                 <p>
                   Usuarios
 
                 </p>
-              </a>
+              </Link>
+
 
             </li>
             <li className={menu_motoboy === true ? "nav-item menu-is-opening menu-open" : "nav-item"}>

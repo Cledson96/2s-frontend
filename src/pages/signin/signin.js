@@ -46,10 +46,12 @@ export default function Signin() {
                                 <input className="input100" type="password" name="password" placeholder="SENHA" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}></input>
 
                             </div>
-                            <div onClick={() => { authorization() }} className="container-login100-form-btn login100-form-btn">
+                            <div onClick={() => { authorization() }} style={{width:"100%"}}>
+                            <div  className="container-login100-form-btn login100-form-btn">
                                 {loading === true ? "Entrar" : <img className='gif' alt='gif' src={loadimg} />}
+                            </div  >
                             </div>
-
+                            
 
                         </form>
                     </div>
