@@ -21,7 +21,19 @@ export function Confirmation({ setmodal }) {
 }
 
 export function Error({ seterror, dataerror }) {
+  let error
 
+  if (dataerror == "motoboy já cadastrado!") {
+    error = dataerror
+  } else if (dataerror == "usuario já cadastrado!") {
+    error = dataerror
+  }
+  else {
+    error = dataerror.map((ref) => {
+      return (<p>{ref}</p>)
+
+    })
+  }
   return (
     <div
       className="modal show "
@@ -32,14 +44,7 @@ export function Error({ seterror, dataerror }) {
           <Modal.Title>Erro ao cadastrar!</Modal.Title>
         </Modal.Header>
         <Modal.Body className='bg-danger'>
-          {dataerror == "motoboy já cadastrado!"?"motoboy já cadastrado!" : "usuario já cadastrado"?"usuario já cadastrado": dataerror.map((ref) => {
-            return( <p>{ref}</p>)
-           
-          })}
-            {dataerror == "usuario já cadastrado!"?"usuario já cadastrado!" : dataerror.map((ref) => {
-            return( <p>{ref}</p>)
-           
-          })}
+          {error}
 
         </Modal.Body>
         <Modal.Footer className='bg-danger'>

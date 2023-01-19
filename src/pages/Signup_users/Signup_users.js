@@ -2,8 +2,8 @@ import Headers from "../../components/headers/headers"
 import Navbar from "../../components/navbar/navbar"
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react';
-import { postUsers ,getUsers} from "../../request/request";
-import {Confirmation,Error} from "../../components/modal/modal";
+import { postUsers, getUsers } from "../../request/request";
+import { Confirmation, Error } from "../../components/modal/modal";
 
 
 export default function Signup_users() {
@@ -14,34 +14,40 @@ export default function Signup_users() {
     const [navbar, setnavbar] = useState(true);
     const [modal, setmodal] = useState(false);
     const [error, seterror] = useState(false);
-    const [data,setdata] =useState({});
-    const [dataerror,setdataerror] =useState({});
+    const [data, setdata] = useState({});
+    const [dataerror, setdataerror] = useState({});
 
-    
-    
+
+
     function handleForm({ value, name }) {
         setdata({
             ...data,
             [name]: value,
         });
     };
-   function handleReset()  {
+    function handleReset() {
         Array.from(document.querySelectorAll("input")).forEach(
-          input => (input.value = "")
+            input => (input.value = "")
         );
         this.setState({
-          itemvalues: [{}]
+            itemvalues: [{}]
         });
-      };
-    function users(){
+    };
+    function users() {
         console.log(data)
         const post = postUsers(data)
-        post.then(()=> {setmodal(true);setdata({});handleReset()});
-        post.catch((ref)=> {console.log(ref);if(ref.response.data==="usuario já cadastrado!"){setdataerror(ref.response.data);seterror(true)}else{let err=ref.response.data.details.map((refe)=>{return (
-            refe.context.label + " é obrigatorio!"
-        )});setdataerror(err);seterror(true)};})
+        post.then(() => { setmodal(true); setdata({}); handleReset() });
+        post.catch((ref) => {
+            console.log(ref); if (ref.response.data === "usuario já cadastrado!") { setdataerror(ref.response.data); seterror(true) } else {
+                let err = ref.response.data.details.map((refe) => {
+                    return (
+                        refe.context.label + " é obrigatorio!"
+                    )
+                }); setdataerror(err); seterror(true)
+            };
+        })
     }
-   
+
     useEffect(() => {
         const answer = getUsers(token);
         answer.then((ref) => { setuser(ref.data[0][0]) });
@@ -53,8 +59,8 @@ export default function Signup_users() {
     }, [])
 
     return (
-        <>{error === true?<Error   seterror={seterror} dataerror={dataerror}></Error> : <></>}
-            {modal === true?<Confirmation setmodal={setmodal} ></Confirmation> : <></>}
+        <>{error === true ? <Error seterror={seterror} dataerror={dataerror}></Error> : <></>}
+            {modal === true ? <Confirmation setmodal={setmodal} ></Confirmation> : <></>}
             <Headers user={user} setnavbar={setnavbar} navbar={navbar} />
             {navbar === true ? <Navbar user={user} /> : <></>}
             <div class="content-wrapper">
@@ -89,11 +95,11 @@ export default function Signup_users() {
                                     <div className="row">
                                         <div class="form-group" style={{ width: "60%" }}>
                                             <label for="inputName">Nome completo</label>
-                                            <input value={data.name?data.name:""} name="name" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}/>
+                                            <input value={data.name ? data.name : ""} name="name" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
                                         <div class="form-group" style={{ marginLeft: "5%", minWidth: "25%" }} >
                                             <label for="inputName">CPF</label>
-                                            <input value={data.cpf?data.cpf:""} name="cpf"  type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                            <input value={data.cpf ? data.cpf : ""} name="cpf" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
                                     </div>
 
@@ -108,7 +114,7 @@ export default function Signup_users() {
                                                 <option selected disabled>Selecione</option>
                                                 <option>Total</option>
                                                 <option>Parcial</option>
-                                              
+
                                             </select>
                                         </div>
                                         <div class="form-group" style={{ minWidth: "150px" }}>
@@ -132,7 +138,7 @@ export default function Signup_users() {
                                         </div>
                                         <div class="form-group" style={{ minWidth: "150px", marginRight: "35px" }}>
                                             <label for="inputProjectLeader">Telefone para recado</label>
-                                            <input name="phonecontact"  type="tel" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                            <input name="phonecontact" type="tel" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
                                     </div>
                                     <div class="form-group" style={{ width: "450px" }}>
@@ -143,7 +149,7 @@ export default function Signup_users() {
                                         <div class="col-12">
                                             <input onClick={() => users()} type="submit" value="Cadastrar novo usuario" class="btn btn-success float-right" />
                                         </div>
-                                        
+
                                     </div>
                                 </div>
 

@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Link } from "react-router-dom"
 import logo from "../../img/logo.png"
 import '../navbar/navbar.css'
+
 export default function Navbar({ user }) {
   const [menu_motoboy, setmenu_motoboy] = useState(false)
-
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
 
@@ -85,10 +85,11 @@ export default function Navbar({ user }) {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a href="pages/layout/top-nav-sidebar.html" className="nav-link">
+                  <Link to={'/motoboys'} className="nav-link">
                     <i className="far fa-circle nav-icon"></i>
                     <p>Informações</p>
-                  </a>
+                  </Link>
+
                 </li>
 
                 <li className="nav-item">

@@ -26,3 +26,12 @@ export function postUsers(body) {
   const promise = axios.post(`${BASE_URL}/signup_users`, body);
   return promise;
 }
+
+export function getMotoboys(authorization) {
+  const promise = axios.get(`${BASE_URL}/motoboys`, {
+    headers: {
+      authorization
+    }
+  })
+  return promise;
+}
