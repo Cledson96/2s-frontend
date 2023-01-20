@@ -35,3 +35,12 @@ export function getMotoboys(authorization) {
   })
   return promise;
 }
+
+export function postOrders(body,authorization) {
+  const promise = axios.post(`${BASE_URL}/signup_motoboys`, body,{
+    headers: {
+      authorization
+    }
+    });
+  return promise;
+}

@@ -11,14 +11,11 @@ import Signin from './pages/signin/signin.js';
 import Home from './pages/home/Home.js';
 import Orders from './pages/orders/orders.js';
 import Signup_motoboy from './pages/Signup_motoboy/Signup_motoboy.js';
+import Signup_clients from './pages/Signup_clients/Signup_clients.js';
 import Signup_users from './pages/Signup_users/Signup_users.js';
 import Motoboys from './pages/Motoboys/Motoboys.js';
 
-
-
 function App() {
- 
-
   return (
     <>
       <BrowserRouter>
@@ -28,6 +25,7 @@ function App() {
           <Route path='/order_entry' element={<Orders />} />
           <Route path='/signup_motoboy' element={<Signup_motoboy />} />
           <Route path='/Signup_users' element={<Signup_users />} />
+          <Route path='/Signup_client' element={<Signup_clients />} />
           <Route path='/motoboys' element={<Motoboys />} />
         </Routes>
       </BrowserRouter>
