@@ -36,8 +36,26 @@ export function getMotoboys(authorization) {
   return promise;
 }
 
+export function getClients(authorization) {
+  const promise = axios.get(`${BASE_URL}/clients`, {
+    headers: {
+      authorization
+    }
+  })
+  return promise;
+}
+
 export function postOrders(body,authorization) {
-  const promise = axios.post(`${BASE_URL}/signup_motoboys`, body,{
+  const promise = axios.post(`${BASE_URL}/orders`, body,{
+    headers: {
+      authorization
+    }
+    });
+  return promise;
+}
+
+export function postClient(body,authorization) {
+  const promise = axios.post(`${BASE_URL}/signup_client`, body,{
     headers: {
       authorization
     }

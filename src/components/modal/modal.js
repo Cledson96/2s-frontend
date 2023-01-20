@@ -25,14 +25,17 @@ export function Error({ seterror, dataerror }) {
 
   if (dataerror == "motoboy já cadastrado!") {
     error = dataerror
-  } else if (dataerror == "usuario já cadastrado!") {
+  } else if (dataerror == "usuario já cadastrado!" || dataerror == "cliente já cadastrado!") {
     error = dataerror
   }
-  else {
+  else if (dataerror) {
+    console.log(dataerror)
     error = dataerror.map((ref) => {
       return (<p>{ref}</p>)
 
     })
+  }else{
+    error = "error"
   }
   return (
     <div

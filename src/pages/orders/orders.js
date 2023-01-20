@@ -2,8 +2,10 @@ import Headers from "../../components/headers/headers"
 import Navbar from "../../components/navbar/navbar"
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react';
-import { getUsers, getMotoboys, postOrders } from "../../request/request";
+import { getUsers, getMotoboys, postOrders, getClients } from "../../request/request";
 import { Error } from "../../components/modal/modal";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 export default function Orders() {
@@ -16,7 +18,12 @@ export default function Orders() {
     const [motoboys, setmotoboys] = useState([]);
     const [dataerror, setdataerror] = useState({});
     const [error, seterror] = useState(false);
+    const [clients, setclients] = useState([])
+    const [startDate, setStartDate] = useState(new Date());
+    console.log(startDate)
 
+    let dataformat = ((startDate?.getDate()) + "/" + ((startDate?.getMonth() + 1)) + "/" + startDate?.getFullYear());
+    console.log(dataformat)
     function handleForm({ value, name }) {
         console.log(data)
         setdata({
@@ -25,19 +32,17 @@ export default function Orders() {
         });
     };
 
-    function handleReset() {
-        Array.from(document.querySelectorAll("input")).forEach(
-            input => (input.value = "")
-        );
-        this.setState({
-            itemvalues: [{}]
-        });
-    };
-
+   
     function sendOrders() {
+        setdata({
+            ...data,
+            datecreated: new Date(),
+            dateexit : startDate,
+            situation:"ok"
+        });
+        const post = postOrders(data,token)
         console.log(data)
-        const post = postOrders(data)
-        post.then(() => { setdata({}); handleReset() });
+        post.then(() => { setdata({})});
         post.catch((ref) => {
             console.log(ref); if (ref.response.data === "pedido já cadastrado!") { setdataerror(ref.response.data); seterror(true) } else {
                 let err = ref.response.data.details.map((refe) => {
@@ -51,10 +56,12 @@ export default function Orders() {
 
     useEffect(() => {
         const answer = getUsers(token);
-        answer.then((ref) => { setuser(ref.data[0][0]); setdata({
-            ...data,
-            usersid: ref.data[0][0].id,
-        });});
+        answer.then((ref) => {
+            setuser(ref.data[0][0]); setdata({
+                ...data,
+                usersid: ref.data[0][0].id,
+            });
+        });
         answer.catch((ref) => {
             if (ref.response.status === 404) {
                 navigate('/signin')
@@ -74,8 +81,22 @@ export default function Orders() {
         })
     }, [])
 
+    useEffect(() => {
+        const answer = getClients(token);
+        answer.then((ref) => {
+            setclients(ref.data)
+
+        });
+        answer.catch((ref) => {
+            if (ref.response.status === 404) {
+
+            }
+        })
+    }, [])
+    console.log(clients)
     return (
         <>
+          {error === true ? <Error seterror={seterror} dataerror={dataerror}></Error> : <></>}
             <Headers user={user} setnavbar={setnavbar} navbar={navbar} />
             {navbar === true ? <Navbar user={user} /> : <></>}
             <div class="content-wrapper">
@@ -101,7 +122,7 @@ export default function Orders() {
                             <div class="col-md-6" style={{ minWidth: "100%" }}>
                                 <div class="card card-secondary " >
                                     <div class="card-header">
-                                        <h3 class="card-title">Cadastro</h3>
+                                        <h3 class="card-title">Entrada de pedidos</h3>
 
                                         <div class="card-tools">
 
@@ -118,53 +139,55 @@ export default function Orders() {
                                                     }) : <></>}
                                                 </select>
                                             </div>
-                                            <div class="form-group" style={{ minWidth: "150px" }}>
-                                                <label for="inputName">PIX para pagamento</label>
-                                                <input name="account" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                            <div class="form-group" style={{ minWidth: "100px", marginRight: "35px" }}>
+                                                <label for="inputStatus">Cliente</label>
+                                                <select name="clientid" id="inputStatus" class="form-control custom-select" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}>
+                                                    <option selected disabled>Selecione</option>
+                                                    {clients ? clients.map((ref, index) => {
+                                                        return <option value={ref.id} key={index}>{ref.name}</option>
+                                                    }) : <></>}
+                                                </select>
                                             </div>
-                                            <div class="form-group" style={{ minWidth: "250px", marginLeft: "35px" }}>
-                                                <label for="inputName">MEI</label>
-                                                <input name="mei" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                            <div class="form-group" style={{ width: "150px" }}>
+                                                <label for="inputName">Data</label>
+                                                <span class="form-control" className='selectionDate'><DatePicker
+                                                    selected={startDate}
+                                                    onChange={(date) => { setStartDate(date); console.log(dataformat) }}
+                                                    className="form-control"
+                                                    id="dateselect"
+                                                    placeholderText={dataformat} />
+                                                </span>
+
                                             </div>
                                         </div>
+                                      
+
+                                       
+
+
+                                       
                                         <div className="row">
-                                            <div class="form-group" style={{ width: "60%" }}>
-                                                <label for="inputName">Nome completo</label>
-                                                <input value={data.name ? data.name : ""} name="name" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                            </div>
-                                            <div class="form-group" style={{ marginLeft: "5%", minWidth: "25%" }} >
-                                                <label for="inputName">CPF</label>
-                                                <input value={data.cpf ? data.cpf : ""} name="cpf" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                            </div>
+                                        <div class="form-group" style={{width:"70%"}}>
+                                            <label for="inputName">Imagem pedido(s)</label>
+                                            <input name="image" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                        </div>
+                                        <div class="form-group" style={{marginLeft:"5%",width:"20%"}}> 
+                                            <label for="inputName">Quantidade</label>
+                                            <input name="qtd" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                        </div>
+                                        </div>
+                                        <div class="form-group" style={{ width: "90%" }}>
+                                            <label for="inputProjectLeader">Observação</label>
+                                            <input name="observation" type="text" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="inputName">Endereço</label>
-                                            <input name="address" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label for="inputClientCompany">Foto</label>
-                                            <input name="imagedocument" type="url" id="inputClientCompany" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                        </div>
-                                        <div className="row">
-                                            <div class="form-group" style={{ minWidth: "150px", marginRight: "35px" }}>
-                                                <label for="inputProjectLeader">Telefone Principal</label>
-                                                <input name="phone" type="tel" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                            </div>
-                                            <div class="form-group" style={{ minWidth: "150px", marginRight: "35px" }}>
-                                                <label for="inputProjectLeader">Telefone para recado</label>
-                                                <input name="phonecontact" type="tel" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style={{ width: "450px" }}>
-                                            <label for="inputProjectLeader">Senha</label>
-                                            <input name="password" type="password" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                        <div class="form-group" style={{ width: "90%" }}>
+                                            <label for="inputProjectLeader">Numero pedido</label>
+                                            <input name="number" type="text" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
-                                                <input onClick={() => sendOrders()} type="submit" value="Cadastrar novo motoboy" class="btn btn-success float-right" />
+                                                <input onClick={() => sendOrders()} type="submit" value="Cadastrar pedido" class="btn btn-success float-right" />
                                             </div>
 
                                         </div>
@@ -175,7 +198,7 @@ export default function Orders() {
                             </div>
 
                         </div>
-                        <div class="row" style={{ width: "50%", marginRight: "10px" }}>
+                        {/* <div class="row" style={{ width: "50%", marginRight: "10px" }}>
                             <div class="col-md-6" style={{ minWidth: "100%" }}>
                                 <div class="card card-primary">
                                     <div class="card-header">
@@ -251,7 +274,7 @@ export default function Orders() {
 
                             </div>
 
-                        </div>
+                        </div> */}
                     </div>
 
                 </section>

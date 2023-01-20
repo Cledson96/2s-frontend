@@ -2,8 +2,8 @@ import Headers from "../../components/headers/headers"
 import Navbar from "../../components/navbar/navbar"
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react';
-import { postMotoboys ,getUsers} from "../../request/request";
-import {Confirmation,Error} from "../../components/modal/modal";
+import { postClient, getUsers } from "../../request/request";
+import { Confirmation, Error } from "../../components/modal/modal";
 
 
 export default function Signup_clients() {
@@ -14,18 +14,20 @@ export default function Signup_clients() {
     const [navbar, setnavbar] = useState(true);
     const [modal, setmodal] = useState(false);
     const [error, seterror] = useState(false);
-    const [data,setdata] =useState({});
-    const [dataerror,setdataerror] =useState({});
+    const [data, setdata] = useState({});
+    const [dataerror, setdataerror] = useState({});
 
-    
-    
+
+    console.log(data)
     function handleForm({ value, name }) {
+       
         setdata({
             ...data,
             [name]: value,
         });
     };
-   function handleReset()  {
+
+    function handleReset()  {
         Array.from(document.querySelectorAll("input")).forEach(
           input => (input.value = "")
         );
@@ -33,15 +35,23 @@ export default function Signup_clients() {
           itemvalues: [{}]
         });
       };
-    function motoboys(){
+      
+    function client() {
         console.log(data)
-        const post = postMotoboys(data)
-        post.then(()=> {setmodal(true);setdata({});handleReset()});
-        post.catch((ref)=> {console.log(ref);if(ref.response.data==="motoboy já cadastrado!"){setdataerror(ref.response.data);seterror(true)}else{let err=ref.response.data.details.map((refe)=>{return (
-            refe.context.label + " é obrigatorio!"
-        )});setdataerror(err);seterror(true)};})
+        const post = postClient(data,token)
+        post.then(() => { setmodal(true); setdata({}); handleReset() });
+        post.catch((ref) => {
+            console.log(ref); if (ref.response.data === "cliente já cadastrado!") { setdataerror(ref.response.data); seterror(true) } else {
+                
+                let err = ref.response.data.details.map((refe) => {
+                    return (
+                        refe.context.label + " é obrigatorio!"
+                    )
+                }); setdataerror(err); seterror(true)
+            };
+        })
     }
-   
+
     useEffect(() => {
         const answer = getUsers(token);
         answer.then((ref) => { setuser(ref.data[0][0]) });
@@ -53,8 +63,8 @@ export default function Signup_clients() {
     }, [])
 
     return (
-        <>{error === true?<Error   seterror={seterror} dataerror={dataerror}></Error> : <></>}
-            {modal === true?<Confirmation setmodal={setmodal} ></Confirmation> : <></>}
+        <>{error === true ? <Error seterror={seterror} dataerror={dataerror}></Error> : <></>}
+            {modal === true ? <Confirmation setmodal={setmodal} ></Confirmation> : <></>}
             <Headers user={user} setnavbar={setnavbar} navbar={navbar} />
             {navbar === true ? <Navbar user={user} /> : <></>}
             <div class="content-wrapper">
@@ -63,12 +73,12 @@ export default function Signup_clients() {
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Cadastro de motoboy</h1>
+                                <h1>Cadastro de cliente</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active">Cadastro motoboy</li>
+                                    <li class="breadcrumb-item active">Cadastro cliente</li>
                                 </ol>
                             </div>
                         </div>
@@ -88,12 +98,12 @@ export default function Signup_clients() {
                                 <div class="card-body">
                                     <div className="row">
                                         <div class="form-group" style={{ width: "60%" }}>
-                                            <label for="inputName">Nome completo</label>
-                                            <input value={data.name?data.name:""} name="name" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}/>
+                                            <label for="inputName">Nome</label>
+                                            <input value={data.name ? data.name : ""} name="name" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
-                                        <div class="form-group" style={{ marginLeft: "5%", minWidth: "25%" }} >
-                                            <label for="inputName">CPF</label>
-                                            <input value={data.cpf?data.cpf:""} name="cpf"  type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                        <div class="form-group" style={{ marginLeft: "5%", minWidth: "30%" }} >
+                                            <label for="inputName">CNPJ</label>
+                                            <input value={data.cnpj ? data.cnpj : ""} name="cnpj" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
                                     </div>
 
@@ -101,28 +111,10 @@ export default function Signup_clients() {
                                         <label for="inputName">Endereço</label>
                                         <input name="address" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                     </div>
-                                    <div className="row">
-                                        <div class="form-group" style={{ minWidth: "70px", marginRight: "35px" }}>
-                                            <label for="inputStatus">Utilitario</label>
-                                            <select name="utility" id="inputStatus" class="form-control custom-select" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}>
-                                                <option selected disabled>Selecione</option>
-                                                <option>Moto</option>
-                                                <option>Carro</option>
-                                                <option>Bicicleta</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" style={{ minWidth: "150px" }}>
-                                            <label for="inputName">PIX para pagamento</label>
-                                            <input name="account" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                        </div>
-                                        <div class="form-group" style={{ minWidth: "250px", marginLeft: "35px" }}>
-                                            <label for="inputName">MEI</label>
-                                            <input name="mei" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                        </div>
-                                    </div>
+                                   
 
                                     <div class="form-group">
-                                        <label for="inputClientCompany">Foto</label>
+                                        <label for="inputClientCompany">Logo da empresa</label>
                                         <input name="imagedocument" type="url" id="inputClientCompany" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                     </div>
                                     <div className="row">
@@ -132,18 +124,18 @@ export default function Signup_clients() {
                                         </div>
                                         <div class="form-group" style={{ minWidth: "150px", marginRight: "35px" }}>
                                             <label for="inputProjectLeader">Telefone para recado</label>
-                                            <input name="phonecontact"  type="tel" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                            <input name="phonecontact" type="tel" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
                                     </div>
                                     <div class="form-group" style={{ width: "450px" }}>
-                                        <label for="inputProjectLeader">Senha</label>
-                                        <input name="password" type="password" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                        <label for="inputProjectLeader">email</label>
+                                        <input name="email" type="email" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
-                                            <input onClick={() => motoboys()} type="submit" value="Cadastrar novo motoboy" class="btn btn-success float-right" />
+                                            <input onClick={() => client()} type="submit" value="Cadastrar novo cliente" class="btn btn-success float-right" />
                                         </div>
-                                        
+
                                     </div>
                                 </div>
 
