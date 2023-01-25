@@ -6,6 +6,7 @@ import { getUsers, getMotoboys, postOrders, getClients } from "../../request/req
 import { Error } from "../../components/modal/modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import MUIDataTable from "mui-datatables";
 
 
 export default function Orders() {
@@ -20,7 +21,7 @@ export default function Orders() {
     const [error, seterror] = useState(false);
     const [clients, setclients] = useState([])
     const [startDate, setStartDate] = useState(new Date());
-    console.log(startDate)
+    const columns = ["ID", "Nome", "Telefone", "Telefone de contato", "Utilitario"];
 
     let dataformat = ((startDate?.getDate()) + "/" + ((startDate?.getMonth() + 1)) + "/" + startDate?.getFullYear());
     console.log(dataformat)
@@ -160,30 +161,26 @@ export default function Orders() {
 
                                             </div>
                                         </div>
-                                      
-
-                                       
-
-
+                                                                          
                                        
                                         <div className="row">
                                         <div class="form-group" style={{width:"70%"}}>
                                             <label for="inputName">Imagem pedido(s)</label>
-                                            <input name="image" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                            <input name="image" type="text" id="inputName" class="form-control" value={data.image?data.image:""} onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
                                         <div class="form-group" style={{marginLeft:"5%",width:"20%"}}> 
                                             <label for="inputName">Quantidade</label>
-                                            <input name="qtd" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                            <input  name="qtd" value={data.qtd?data.qtd:""} type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
                                         </div>
                                         <div class="form-group" style={{ width: "90%" }}>
                                             <label for="inputProjectLeader">Observação</label>
-                                            <input name="observation" type="text" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                            <input  name="observation" type="text" id="inputProjectLeader" class="form-control" value={data.observation?data.observation:""} onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
 
                                         <div class="form-group" style={{ width: "90%" }}>
                                             <label for="inputProjectLeader">Numero pedido</label>
-                                            <input name="number" type="text" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                            <input  name="number" type="text" id="inputProjectLeader" class="form-control" value={data.number?data.number:""} onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
@@ -198,7 +195,7 @@ export default function Orders() {
                             </div>
 
                         </div>
-                        {/* <div class="row" style={{ width: "50%", marginRight: "10px" }}>
+                        <div class="row" style={{ width: "50%", marginRight: "10px" }}>
                             <div class="col-md-6" style={{ minWidth: "100%" }}>
                                 <div class="card card-primary">
                                     <div class="card-header">
@@ -209,72 +206,14 @@ export default function Orders() {
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div className="row">
-                                            <div class="form-group" style={{ width: "60%" }}>
-                                                <label for="inputName">Nome completo</label>
-                                                <input value={data.name ? data.name : ""} name="name" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                            </div>
-                                            <div class="form-group" style={{ marginLeft: "5%", minWidth: "25%" }} >
-                                                <label for="inputName">CPF</label>
-                                                <input value={data.cpf ? data.cpf : ""} name="cpf" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="inputName">Endereço</label>
-                                            <input name="address" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                        </div>
-                                        <div className="row">
-                                            <div class="form-group" style={{ minWidth: "70px", marginRight: "35px" }}>
-                                                <label for="inputStatus">Utilitario</label>
-                                                <select name="utility" id="inputStatus" class="form-control custom-select" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}>
-                                                    <option selected disabled>Selecione</option>
-                                                    <option>Moto</option>
-                                                    <option>Carro</option>
-                                                    <option>Bicicleta</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group" style={{ minWidth: "150px" }}>
-                                                <label for="inputName">PIX para pagamento</label>
-                                                <input name="account" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                            </div>
-                                            <div class="form-group" style={{ minWidth: "250px", marginLeft: "35px" }}>
-                                                <label for="inputName">MEI</label>
-                                                <input name="mei" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="inputClientCompany">Foto</label>
-                                            <input name="imagedocument" type="url" id="inputClientCompany" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                        </div>
-                                        <div className="row">
-                                            <div class="form-group" style={{ minWidth: "150px", marginRight: "35px" }}>
-                                                <label for="inputProjectLeader">Telefone Principal</label>
-                                                <input name="phone" type="tel" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                            </div>
-                                            <div class="form-group" style={{ minWidth: "150px", marginRight: "35px" }}>
-                                                <label for="inputProjectLeader">Telefone para recado</label>
-                                                <input name="phonecontact" type="tel" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style={{ width: "450px" }}>
-                                            <label for="inputProjectLeader">Senha</label>
-                                            <input name="password" type="password" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <input onClick={() => sendOrders()} type="submit" value="Cadastrar novo motoboy" class="btn btn-success float-right" />
-                                            </div>
-
-                                        </div>
+                                       
                                     </div>
 
                                 </div>
 
                             </div>
 
-                        </div> */}
+                        </div>
                     </div>
 
                 </section>

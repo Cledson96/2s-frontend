@@ -14,6 +14,7 @@ import Signup_motoboy from './pages/Signup_motoboy/Signup_motoboy.js';
 import Signup_clients from './pages/Signup_clients/Signup_clients.js';
 import Signup_users from './pages/Signup_users/Signup_users.js';
 import Motoboys from './pages/Motoboys/Motoboys.js';
+import Clients from './pages/Clients/Clients.js';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path='/Signup_users' element={<Signup_users />} />
           <Route path='/Signup_client' element={<Signup_clients />} />
           <Route path='/motoboys' element={<Motoboys />} />
+          <Route path='/clients' element={<Clients/>} />
         </Routes>
       </BrowserRouter>
     </>

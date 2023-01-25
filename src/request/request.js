@@ -44,6 +44,14 @@ export function getClients(authorization) {
   })
   return promise;
 }
+export function getOrders(authorization) {
+  const promise = axios.get(`${BASE_URL}/orders`, {
+    headers: {
+      authorization
+    }
+  })
+  return promise;
+}
 
 export function postOrders(body,authorization) {
   const promise = axios.post(`${BASE_URL}/orders`, body,{

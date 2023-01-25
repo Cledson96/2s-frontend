@@ -97,7 +97,7 @@ export default function Navbar({ user }) {
               </ul>
             </li>
 
-            <li className={menu_motoboy === true ? "nav-item menu-is-opening menu-open" : "nav-item"}>
+            <li className={menu_client === true ? "nav-item menu-is-opening menu-open" : "nav-item"}>
               <a onClick={() => setmenu_client(!menu_client)} className="nav-link">
                 <i className="fa fa-motorcycle m-1" aria-hidden="true"></i>
                 <p>
@@ -113,7 +113,7 @@ export default function Navbar({ user }) {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <Link to={'/motoboys'} className="nav-link">
+                  <Link to={'/clients'} className="nav-link">
                     <i className="far fa-circle nav-icon"></i>
                     <p>Informações</p>
                   </Link>
