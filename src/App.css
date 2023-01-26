@@ -37,3 +37,7 @@ q:before, q:after {
 	content: '';
 	content: none;
 }
+.my-custom-row-class{
+	text-align: center;
+
+}

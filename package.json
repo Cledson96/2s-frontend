@@ -16,6 +16,7 @@
     "bootstrap-slider": "^11.0.2",
     "bootstrap4-duallistbox": "^4.0.2",
     "jquery": "^3.6.3",
+    "moment": "^2.29.4",
     "mui-datatables": "^4.3.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",

@@ -62,6 +62,16 @@ export function postOrders(body,authorization) {
   return promise;
 }
 
+export function getOrders_filter(body,authorization) {
+  console.log(body)
+  const promise = axios.post(`${BASE_URL}/orders_filter`, body,{
+    headers: {
+      authorization
+    }
+    });
+  return promise;
+}
+
 export function postClient(body,authorization) {
   const promise = axios.post(`${BASE_URL}/signup_client`, body,{
     headers: {
