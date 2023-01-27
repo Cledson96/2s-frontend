@@ -10,6 +10,8 @@ import MUIDataTable from "mui-datatables";
 import moment from "moment";
 
 export default function Orders() {
+    let date = new Date();
+
 
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
