@@ -28,12 +28,9 @@ export function Error({ seterror, dataerror }) {
   } else if (dataerror == "usuario já cadastrado!" || dataerror == "cliente já cadastrado!") {
     error = dataerror
   }
-  else if (dataerror) {
-    console.log(dataerror)
-    error = dataerror.map((ref) => {
-      return (<p>{ref}</p>)
-
-    })
+  else if (dataerror =="pedido já cadastrado!") {
+    error = (<p>{dataerror}</p>)
+   
   }else{
     error = "error"
   }

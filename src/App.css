@@ -41,3 +41,8 @@ q:before, q:after {
 	text-align: center;
 
 }
+.atualiza{
+	background-color: rgba(255, 72, 0, 0.822);
+	border-radius: 5px;
+	color: rgb(128, 0, 0);
+}

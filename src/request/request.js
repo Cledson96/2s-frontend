@@ -89,3 +89,22 @@ export function getOrders_day(authorization) {
   })
   return promise;
 }
+export function getOrders_filter_order(authorization,ordered) {
+
+  const promise = axios.get(`${BASE_URL}/orders_filter/${ordered}`, {
+    headers: {
+      authorization
+    }
+  })
+  return promise;
+}
+
+export function order_out(authorization,ids) {
+
+  const promise = axios.post(`${BASE_URL}/orders_out`,ids, {
+    headers: {
+      authorization
+    }
+  })
+  return promise;
+}

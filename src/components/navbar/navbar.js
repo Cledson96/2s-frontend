@@ -44,6 +44,13 @@ export default function Navbar({ user }) {
                 </p>
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to={'/order_out'} > <i className="nav-icon fas fa-th"></i>
+                <p>
+                  Entrada de ausentes
+                </p>
+              </Link>
+            </li>
 
             <li className="nav-item">
               <a href="#" className="nav-link">

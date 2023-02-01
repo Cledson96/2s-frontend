@@ -8,10 +8,12 @@ export default function Dashboard() {
     const [orders, setorders] = useState(0);
     const [qtdboys, setqtdboys] = useState(0);
     const [qtdclients, setqtdclients] = useState(0);
+    const [qtdausentes, setqtdausentes] = useState(0);
 
     useEffect(() => {
         const answer = getOrders_day(token);
         answer.then((ref) => {
+            setqtdausentes(ref.data.filter(ref=> ref.situation === 'ausente').length)
             console.log(ref.data)
             setorders(ref.data.reduce((acc, obj) => acc + Number(obj.qtd), 0));
             let uniqueboys = new Set(ref.data.map(obj => obj.motoboysid));
@@ -90,20 +92,33 @@ export default function Dashboard() {
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="#" class="small-box-footer">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
+                        <div class="col-lg-3 col-6">
 
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>{qtdausentes}</h3>
+
+                                    <p>Pedidos ausentes</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-clipboard"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
                     </div>
 
 
                     <div class="row">
 
-                      
-                        <section class="col-lg-5 connectedSortable"> 
-                      
 
-                          
+                        <section class="col-lg-5 connectedSortable">
+
+
+
 
                         </section>
 
