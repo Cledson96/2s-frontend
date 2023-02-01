@@ -38,14 +38,14 @@ export default function Navbar({ user }) {
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link" to={'/order_entry'} > <i className="nav-icon fas fa-th"></i>
+              <Link className="nav-link" to={'/order_entry'} > <i className="nav-icon fas fa-list-ul"></i>
                 <p>
                   Entrada de pedidos
                 </p>
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to={'/order_out'} > <i className="nav-icon fas fa-th"></i>
+              <Link className="nav-link" to={'/order_out'} > <i className="nav-icon fas fa-exclamation-triangle"></i>
                 <p>
                   Entrada de ausentes
                 </p>

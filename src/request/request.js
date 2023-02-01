@@ -81,8 +81,8 @@ export function postClient(body,authorization) {
   return promise;
 }
 
-export function getOrders_day(authorization) {
-  const promise = axios.get(`${BASE_URL}/orders_day`, {
+export function getOrders_day(authorization,body) {
+  const promise = axios.post(`${BASE_URL}/orders_day`,body, {
     headers: {
       authorization
     }
