@@ -80,10 +80,10 @@ export default function Navbar({ user }) {
               </a>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-                  <a href="pages/layout/top-nav.html" className="nav-link">
+                <Link to={'/motoboys_orders'} className="nav-link">
                     <i className="far fa-circle nav-icon"></i>
                     <p>Pedidos</p>
-                  </a>
+                    </Link>
                 </li>
                 <li className="nav-item">
                   <Link to={'/motoboys'} className="nav-link">

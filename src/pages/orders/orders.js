@@ -16,7 +16,7 @@ export default function Orders() {
 
     const [user, setuser] = useState("loading");
     const [navbar, setnavbar] = useState(true);
-    const [data, setdata] = useState({ observation: " ",image: " ",qtd:1});
+    const [data, setdata] = useState({ observation: " ", image: " ", qtd: 1 });
     const [motoboys, setmotoboys] = useState([]);
     const [dataerror, setdataerror] = useState({});
     const [error, seterror] = useState(false);
@@ -78,7 +78,7 @@ export default function Orders() {
             datecreated: new Date(),
             dateexit: startDate
         };
-        
+
         const post = postOrders(send, token)
         post.then(() => {
 
@@ -250,7 +250,7 @@ export default function Orders() {
                                         <div class="row">
                                             <div class="col-12">
                                                 <input onClick={() => {
-                                                   
+
                                                     sendOrders()
                                                 }} type="submit" value="Cadastrar pedido" class="btn btn-success float-right" />
                                             </div>
