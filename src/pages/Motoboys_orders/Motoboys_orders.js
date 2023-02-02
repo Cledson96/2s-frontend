@@ -29,10 +29,11 @@ export default function Motoboys_orders() {
     const [qtdclients, setqtdclients] = useState(0);
     const [motoboy, setmotoboy] = useState(0);
     const [orderstd, setorderstd] = useState(0)
+    const [aus, setaus] = useState(0)
 
     const columns = ["Cliente", "Qtd pedidos", "QTD ausentes", "pedidos liquido"];
     const columnsone = ["Cliente", "Numero pedido", "Qtd", "Situação", "Imagem", "Data"];
-    const columnstwo = ["Cliente", "Qtd pedidos", "QTD ausentes", "pedidos liquido"];
+    const columnstwo = ["Cliente", "Numero pedido", "Situação", "Imagem","Data"];
     const options = {
         responsive: 'scrollMaxHeight',
         filterType: 'checkbox',
@@ -47,6 +48,8 @@ export default function Motoboys_orders() {
             );
         }
     };
+
+    console.log(aus)
     function handleForm({ value, name }) {
 
         setdata({
@@ -74,10 +77,17 @@ export default function Motoboys_orders() {
             let uniqueclients = Array.from(new Set(ref.data.map(obj => obj.name)));
             setqtdausentes(ref.data.filter(ref => ref.situation === 'ausente').length)
             setQTD_orders(ref.data.reduce((acc, obj) => acc + Number(obj.qtd), 0));
+            
             setqtdclients(uniqueclients);
-            console.log(uniqueclients)
+          
+            setaus(ref.data.filter( a => a.situation ==='ausente').map((i)=>{
+              
+                    return [i.name, i.number,i.situation, <a href={i.image} target="_blank" >Abrir</a>, moment(i.dateexit).format('DD/MM/YYYY')]
+                
+                
+            }))
             setorderstd(ref.data.map((fifa) => {
-                return [fifa.name, fifa.number, fifa.qtd, fifa.situation, <a href={fifa.image} target="_blank" >Abrir</a>, moment(fifa.dataexit).format('DD/MM/YYYY')]
+                return [fifa.name, fifa.number, fifa.qtd, fifa.situation, <a href={fifa.image} target="_blank" >Abrir</a>, moment(fifa.dateexit).format('DD/MM/YYYY')]
             }))
             setorders(uniqueclients.map((props) => {
                 let filter = ref.data.filter(rec => rec.name === props);
@@ -262,7 +272,12 @@ export default function Motoboys_orders() {
                                     />
                                     :
                                     table2 === true ?
-                                        "terceira" :
+                                    <MUIDataTable
+                                    title={`Ausentes do dia  ${moment(startDate).format('MM/DD/YYYY')} até  ${moment(endDate).format('MM/DD/YYYY')} do motoboy ${motoboy}`}
+                                    data={aus}
+                                    columns={columnstwo}
+                                    options={options}
+                                /> :
                                         <></>}
 
 

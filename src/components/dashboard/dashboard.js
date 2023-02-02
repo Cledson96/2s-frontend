@@ -16,9 +16,9 @@ export default function Dashboard() {
     const [qtdausentes, setqtdausentes] = useState(0);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setendDate] = useState(new Date());
-    const [data, setdata] = useState();
-    const [data2, setdata2] = useState();
-    const [data3, setdata3] = useState();
+    const [data, setdata] = useState([]);
+    const [data2, setdata2] = useState([]);
+    const [data3, setdata3] = useState([]);
 
 
     const options = {
@@ -35,7 +35,7 @@ export default function Dashboard() {
         backgroundColor: 'none'
     };
 
-    
+
     const options3 = {
         title: "Pedidos por motoboy",
         is3D: true,
@@ -65,24 +65,23 @@ export default function Dashboard() {
             setqtdclients(uniqueclients);
             let env = [["Task", "Hours per Day"]]
             let env2 = [["Task", "Hours per Day"]]
-            let env3 = [ ["Pedidos", "Total", "Ausentes"]]
+            let env3 = [["Pedidos", "Total", "Ausentes"]]
             uniqueclients.map((refe) => {
                 env2.push([refe, ref.data.filter((ref) => ref.client === refe).filter(ref => ref.situation === 'ausente').length])
             })
             uniqueclients.map((refe) => {
                 env.push([refe, ref.data.filter((ref) => ref.client === refe).reduce((acc, obj) => acc + Number(obj.qtd), 0)])
             })
-            uniqueboys.map((refe)=>{env3.push(
-                [refe,ref.data.filter((refer) => refer.motoboy === refe).reduce((acc, obj) => acc + Number(obj.qtd), 0),ref.data.filter((refer) => refer.motoboy === refe).filter(refi => refi.situation === 'ausente').length]
-            )})
+            uniqueboys.map((refe) => {
+                env3.push(
+                    [refe, ref.data.filter((refer) => refer.motoboy === refe).reduce((acc, obj) => acc + Number(obj.qtd), 0), ref.data.filter((refer) => refer.motoboy === refe).filter(refi => refi.situation === 'ausente').length]
+                )
+            })
 
             setdata2(env2)
             setdata(env)
             setdata3(env3)
-         
-        
 
-            console.log(uniqueboys)
 
         });
         answer.catch((ref) => {
@@ -211,37 +210,39 @@ export default function Dashboard() {
                     <div class="row">
 
                         <section class="col-lg-5 connectedSortable">
-
-                            <Chart
+                            {data.length > 1 ? <Chart
                                 chartType="PieChart"
                                 data={data}
                                 options={options}
                                 width={"100%"}
                                 height={"400px"}
-                            />
+                            /> : <></>
+                            }
 
 
                         </section>
                         <section class="col-lg-5 connectedSortable">
-                            <Chart
+                            {data2.length > 1 ?  <Chart
                                 chartType="PieChart"
                                 data={data2}
                                 options={optionsAus}
                                 width={"100%"}
                                 height={"400px"}
-                            />
+                            />:<></> }
+                          
                         </section>
 
                     </div>
                     <div class="row">
-                        <Chart
+                        {data3.length > 1?<Chart
                             chartType="ColumnChart"
                             width="100%"
                             height="400px"
                             data={data3}
                             options={options3}
 
-                        />
+                        />:<></>}
+                        
                     </div>
                 </div>
             </section>
