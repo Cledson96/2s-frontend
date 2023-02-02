@@ -46,3 +46,6 @@ q:before, q:after {
 	border-radius: 5px;
 	color: rgb(128, 0, 0);
 }
+.arrumando{
+	z-index: -1;
+}
