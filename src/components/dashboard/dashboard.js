@@ -18,6 +18,7 @@ export default function Dashboard() {
     const [endDate, setendDate] = useState(new Date());
     const [data, setdata] = useState();
     const [data2, setdata2] = useState();
+    const [data3, setdata3] = useState();
 
 
     const options = {
@@ -29,6 +30,14 @@ export default function Dashboard() {
 
     const optionsAus = {
         title: "Ausentes por clientes",
+        is3D: true,
+        pieHole: 0.4,
+        backgroundColor: 'none'
+    };
+
+    
+    const options3 = {
+        title: "Pedidos por motoboy",
         is3D: true,
         pieHole: 0.4,
         backgroundColor: 'none'
@@ -56,15 +65,23 @@ export default function Dashboard() {
             setqtdclients(uniqueclients);
             let env = [["Task", "Hours per Day"]]
             let env2 = [["Task", "Hours per Day"]]
+            let env3 = [ ["Pedidos", "Total", "Ausentes"]]
             uniqueclients.map((refe) => {
                 env2.push([refe, ref.data.filter((ref) => ref.client === refe).filter(ref => ref.situation === 'ausente').length])
             })
             uniqueclients.map((refe) => {
                 env.push([refe, ref.data.filter((ref) => ref.client === refe).reduce((acc, obj) => acc + Number(obj.qtd), 0)])
             })
+            uniqueboys.map((refe)=>{env3.push(
+                [refe,ref.data.filter((refer) => refer.motoboy === refe).reduce((acc, obj) => acc + Number(obj.qtd), 0),ref.data.filter((refer) => refer.motoboy === refe).filter(refi => refi.situation === 'ausente').length]
+            )})
+
             setdata2(env2)
             setdata(env)
-            console.log(uniqueclients);
+            setdata3(env3)
+         
+        
+
             console.log(uniqueboys)
 
         });
@@ -216,7 +233,16 @@ export default function Dashboard() {
                         </section>
 
                     </div>
+                    <div class="row">
+                        <Chart
+                            chartType="ColumnChart"
+                            width="100%"
+                            height="400px"
+                            data={data3}
+                            options={options3}
 
+                        />
+                    </div>
                 </div>
             </section>
         </div>
