@@ -33,9 +33,9 @@ export default function Motoboys_orders() {
 
     const columns = ["Cliente", "Qtd pedidos", "QTD ausentes", "pedidos liquido"];
     const columnsone = ["Cliente", "Numero pedido", "Qtd", "Situação", "Imagem", "Data"];
-    const columnstwo = ["Cliente", "Numero pedido", "Situação", "Imagem","Data"];
+    const columnstwo = ["Cliente", "Numero pedido", "Situação", "Imagem", "Data"];
     const options = {
-        responsive: 'scrollMaxHeight',
+
         filterType: 'checkbox',
         selectableRows: 'none',
         customRowRender: (data, rowIndex) => {
@@ -49,7 +49,7 @@ export default function Motoboys_orders() {
         }
     };
 
-    console.log(aus)
+
     function handleForm({ value, name }) {
 
         setdata({
@@ -71,20 +71,31 @@ export default function Motoboys_orders() {
         }
 
         const answer = getOrders_filter(body, token);
+
         answer.then((ref) => {
+            if (ref.data.length === 0) {
+                setorderstd([]);
+                setaus([]);
+                setmotoboy("");
+                setorders([]);
+                setQTD_orders(0);
+                setqtdclients(0);
+                setqtdausentes(0);
+                return
+            }
             setmotoboy(ref.data[0].motoboy)
-            console.log(ref.data)
+
             let uniqueclients = Array.from(new Set(ref.data.map(obj => obj.name)));
             setqtdausentes(ref.data.filter(ref => ref.situation === 'ausente').length)
             setQTD_orders(ref.data.reduce((acc, obj) => acc + Number(obj.qtd), 0));
-            
+
             setqtdclients(uniqueclients);
-          
-            setaus(ref.data.filter( a => a.situation ==='ausente').map((i)=>{
-              
-                    return [i.name, i.number,i.situation, <a href={i.image} target="_blank" >Abrir</a>, moment(i.dateexit).format('DD/MM/YYYY')]
-                
-                
+
+            setaus(ref.data.filter(a => a.situation === 'ausente').map((i) => {
+
+                return [i.name, i.number, i.situation, <a href={i.image} target="_blank" >Abrir</a>, moment(i.dateexit).format('DD/MM/YYYY')]
+
+
             }))
             setorderstd(ref.data.map((fifa) => {
                 return [fifa.name, fifa.number, fifa.qtd, fifa.situation, <a href={fifa.image} target="_blank" >Abrir</a>, moment(fifa.dateexit).format('DD/MM/YYYY')]
@@ -132,16 +143,16 @@ export default function Motoboys_orders() {
         <>
             <Headers user={user} setnavbar={setnavbar} navbar={navbar} />
             {navbar === true ? <Navbar user={user} /> : <></>}
-            <div class="content-wrapper">
-                <div class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1 class="m-0">Entregas motoboy</h1>
-                                <div class="row">
-                                    <div class="form-group" style={{ width: "150px" }}>
-                                        <label for="inputName">Data inicial</label>
-                                        <span class="form-control" className='selectionDate'>
+            <div className="content-wrapper">
+                <div className="content-header">
+                    <div className="container-fluid">
+                        <div className="row mb-2">
+                            <div className="col-sm-6">
+                                <h1 className="m-0">Entregas motoboy</h1>
+                                <div className="row">
+                                    <div className="form-group" style={{ width: "150px" }}>
+                                        <label htmlFor="inputName">Data inicial</label>
+                                        <span className='selectionDate'>
                                             <DatePicker
                                                 selected={startDate}
                                                 locale={pt}
@@ -153,9 +164,9 @@ export default function Motoboys_orders() {
                                         </span>
 
                                     </div>
-                                    <div class="form-group" style={{ width: "150px", marginLeft: "30px" }}>
-                                        <label for="inputName">Data final</label>
-                                        <span class="form-control" className='selectionDate'>
+                                    <div className="form-group" style={{ width: "150px", marginLeft: "30px" }}>
+                                        <label htmlFor="inputName">Data final</label>
+                                        <span className='selectionDate'>
                                             <DatePicker
                                                 selected={endDate}
                                                 locale={pt}
@@ -167,10 +178,10 @@ export default function Motoboys_orders() {
                                         </span>
 
                                     </div>
-                                    <div class="form-group" style={{ minWidth: "70px", marginLeft: "35px" }}>
-                                        <label for="inputStatus">Motoboy</label>
-                                        <select name="motoboysid" id="inputStatus" class="form-control custom-select" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}>
-                                            <option selected disabled>Selecione</option>
+                                    <div className="form-group" style={{ minWidth: "70px", marginLeft: "35px" }}>
+                                        <label htmlFor="inputStatus">Motoboy</label>
+                                        <select name="motoboysid" id="inputStatus" className="form-control custom-select" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}>
+                                            <option >Selecione</option>
                                             {motoboys ? motoboys.map((ref, index) => {
                                                 return <option value={ref.id} key={index} >{ref.name}</option>
                                             }) : <></>}
@@ -181,83 +192,83 @@ export default function Motoboys_orders() {
 
 
                             </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active">Entregas motoboy</li>
+                            <div className="col-sm-6">
+                                <ol className="breadcrumb float-sm-right">
+                                    <li className="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li className="breadcrumb-item active">Entregas motoboy</li>
                                 </ol>
                             </div>
                         </div>
                     </div>
                 </div>
-                <section class="content">
-                    <div class="container-fluid">
+                <section className="content">
+                    <div className="container-fluid">
 
-                        <div class="row">
-                            <div class="col-lg-3 col-6">
+                        <div className="row">
+                            <div className="col-lg-3 col-6">
 
-                                <div class="small-box bg-info" >
-                                    <div class="inner">
+                                <div className="small-box bg-info" >
+                                    <div className="inner">
                                         <h3>{QTD_orders}</h3>
 
                                         <p>Pedidos </p>
                                     </div>
-                                    <div class="icon" >
-                                        <i class="ion ion-clipboard"></i>
+                                    <div className="icon" >
+                                        <i className="ion ion-clipboard"></i>
                                     </div>
-                                    <a onClick={() => { settable(false); settable1(true); settable2(false) }} style={{ zIndex: "0" }} class="small-box-footer" >Mais informações <i class="fas fa-arrow-circle-right"  ></i></a>
+                                    <a onClick={() => { settable(false); settable1(true); settable2(false) }} style={{ zIndex: "0" }} className="small-box-footer" >Mais informações <i className="fas fa-arrow-circle-right"  ></i></a>
                                 </div>
                             </div>
 
 
-                            <div class="col-lg-3 col-6">
+                            <div className="col-lg-3 col-6">
 
-                                <div class="small-box bg-primary">
-                                    <div class="inner">
+                                <div className="small-box bg-primary">
+                                    <div className="inner">
                                         <h3>{qtdclients.length || 0}</h3>
 
                                         <p>Clientes utilizados</p>
                                     </div>
-                                    <div class="icon">
-                                        <i class="ion ion-pie-graph"></i>
+                                    <div className="icon">
+                                        <i className="ion ion-pie-graph"></i>
                                     </div>
 
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-6">
+                            <div className="col-lg-3 col-6">
 
-                                <div class="small-box bg-danger">
-                                    <div class="inner">
+                                <div className="small-box bg-danger">
+                                    <div className="inner">
                                         <h3>{qtdausentes}</h3>
 
                                         <p>Pedidos ausentes</p>
                                     </div>
-                                    <div class="icon">
-                                        <i class="ion ion-clipboard"></i>
+                                    <div className="icon">
+                                        <i className="ion ion-clipboard"></i>
                                     </div>
-                                    <a onClick={() => { settable(false); settable1(false); settable2(true) }} class="small-box-footer">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a onClick={() => { settable(false); settable1(false); settable2(true) }} className="small-box-footer">Mais informações <i className="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-6">
+                            <div className="col-lg-3 col-6">
 
-                                <div class="small-box bg-warning">
-                                    <div class="inner">
+                                <div className="small-box bg-warning">
+                                    <div className="inner">
 
                                         <p>Resumo</p>
                                     </div>
-                                    <div class="icon">
-                                        <i class="ion ion-clipboard"></i>
+                                    <div className="icon">
+                                        <i className="ion ion-clipboard"></i>
                                     </div>
-                                    <a onClick={() => { settable(true); settable1(false); settable2(false) }} class="small-box-footer">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a onClick={() => { settable(true); settable1(false); settable2(false) }} className="small-box-footer">Mais informações <i className="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
 
 
-                        <div class="row">
+                        <div className="row">
                             {table === true ?
                                 <MUIDataTable
-                                    title={`Pedidos do dia  ${moment(startDate).format('MM/DD/YYYY')} até  ${moment(endDate).format('MM/DD/YYYY')} do motoboy ${motoboy}`}
+                                    title={`Pedidos do dia  ${moment(startDate).format('DD/MM/YYYY')} até  ${moment(endDate).format('DD/MM/YYYY')} do motoboy ${motoboy}`}
                                     data={orders}
                                     columns={columns}
                                     options={options}
@@ -265,19 +276,19 @@ export default function Motoboys_orders() {
                                 :
                                 table1 === true ?
                                     <MUIDataTable
-                                        title={`Pedidos do dia  ${moment(startDate).format('MM/DD/YYYY')} até  ${moment(endDate).format('MM/DD/YYYY')} do motoboy ${motoboy}`}
+                                        title={`Pedidos do dia  ${moment(startDate).format('DD/MM/YYYY')} até  ${moment(endDate).format('MM/DD/YYYY')} do motoboy ${motoboy}`}
                                         data={orderstd}
                                         columns={columnsone}
                                         options={options}
                                     />
                                     :
                                     table2 === true ?
-                                    <MUIDataTable
-                                    title={`Ausentes do dia  ${moment(startDate).format('MM/DD/YYYY')} até  ${moment(endDate).format('MM/DD/YYYY')} do motoboy ${motoboy}`}
-                                    data={aus}
-                                    columns={columnstwo}
-                                    options={options}
-                                /> :
+                                        <MUIDataTable
+                                            title={`Ausentes do dia  ${moment(startDate).format('DD/MM/YYYY')} até  ${moment(endDate).format('DD/MM/YYYY')} do motoboy ${motoboy}`}
+                                            data={aus}
+                                            columns={columnstwo}
+                                            options={options}
+                                        /> :
                                         <></>}
 
 

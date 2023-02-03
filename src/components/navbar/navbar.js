@@ -52,15 +52,7 @@ export default function Navbar({ user }) {
               </Link>
             </li>
 
-            <li className="nav-item">
-              <a href="#" className="nav-link">
-                <i className="nav-icon fas fa-chart-pie"></i>
-                <p>
-                  Informações de  Pedidos
-                </p>
-              </a>
-            </li>
-
+           
             <li className="nav-item">
               <Link className='nav-link' to={"/signup_users"}>
                 <i className="nav-icon fas fa-user"></i>
@@ -113,12 +105,7 @@ export default function Navbar({ user }) {
                 </p>
               </a>
               <ul className="nav nav-treeview">
-                <li className="nav-item">
-                  <a href="pages/layout/top-nav.html" className="nav-link">
-                    <i className="far fa-circle nav-icon"></i>
-                    <p>Dashboard</p>
-                  </a>
-                </li>
+               
                 <li className="nav-item">
                   <Link to={'/clients'} className="nav-link">
                     <i className="far fa-circle nav-icon"></i>

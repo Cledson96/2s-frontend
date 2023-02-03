@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { useState } from 'react';
 
 
-export default function Headers({ user,setnavbar,navbar }) {
+export default function Headers({setnavbar,navbar }) {
 
 
   const [fullscreen, setfullscreen] = useState(false)

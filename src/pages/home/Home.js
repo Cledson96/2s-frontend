@@ -5,6 +5,7 @@ import { getUsers } from "../../request/request";
 import { useNavigate } from 'react-router-dom'
 import Dashboard from "../../components/dashboard/dashboard";
 
+
 export default function Home() {
 
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function Home() {
         <>
         <Headers user={user} setnavbar={setnavbar} navbar={navbar} />
            {navbar===true?<Navbar user={user} />:<></>} 
-           <Dashboard></Dashboard>
+           <Dashboard navbar={navbar}/>
            
         </>
     )

@@ -94,7 +94,7 @@ export default function Orders() {
             }); setrefresh(!refresh)
         });
         post.catch((ref) => {
-            console.log(ref); if (ref.response.data === "pedido já cadastrado!") { setdataerror(ref.response.data); seterror(true) } else {
+            if (ref.response.data === "pedido já cadastrado!") { setdataerror(ref.response.data); seterror(true) } else {
                 let err = ref.response.data.details.map((refe) => {
                     return (
                         refe.context.label + " é obrigatorio!"
@@ -119,7 +119,6 @@ export default function Orders() {
 
         const answer = getOrders_filter(body, token);
         answer.then((ref) => {
-            console.log(ref.data)
             setQTD_orders(ref.data.length || 0)
             setorders(ref.data.map((ref) => {
                 return [ref.id, ref.number, ref.name, ref.qtd, <a href={ref.image} target="_blank" >Abrir</a>, moment(ref.data).format('DD-MM-YYYY'), ref.situation]
@@ -162,61 +161,62 @@ export default function Orders() {
 
     return (
         <>
+
             {error === true ? <Error seterror={seterror} dataerror={dataerror}></Error> : <></>}
             <Headers user={user} setnavbar={setnavbar} navbar={navbar} />
             {navbar === true ? <Navbar user={user} /> : <></>}
-            <div class="content-wrapper">
+            <div className="content-wrapper">
 
-                <section class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
+                <section className="content-header">
+                    <div className="container-fluid">
+                        <div className="row mb-2">
+                            <div className="col-sm-6">
                                 <h1>Entrada de pedidos</h1>
                             </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active">Entrada pedidos</li>
+                            <div className="col-sm-6">
+                                <ol className="breadcrumb float-sm-right">
+                                    <li className="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li className="breadcrumb-item active">Entrada pedidos</li>
                                 </ol>
                             </div>
                         </div>
                     </div>
                 </section>
-                <section class="content" style={{ marginLeft: "40px", minHeight: "100vh" }}>
-                    <div class="row" style={{ minWidth: "100%", justifyContent: "normal" }}>
-                        <div class="row" style={{ width: "45%", marginRight: "10px" }} >
-                            <div class="col-md-6" style={{ minWidth: "100%" }}>
-                                <div class="card card-secondary " >
-                                    <div class="card-header">
-                                        <h3 class="card-title">Entrada de pedidos</h3>
+                <section className="content" style={{ marginLeft: "40px", minHeight: "100vh" }}>
+                    <div className="row" style={{ minWidth: "100%", justifyContent: "normal" }}>
+                        <div className="row" style={{ width: "45%", marginRight: "10px" }} >
+                            <div className="col-md-6" style={{ minWidth: "100%" }}>
+                                <div className="card card-secondary " >
+                                    <div className="card-header">
+                                        <h3 className="card-title">Entrada de pedidos</h3>
 
-                                        <div class="card-tools">
+                                        <div className="card-tools">
 
                                         </div>
                                     </div>
-                                    <div class="card-body">
+                                    <div className="card-body">
                                         <div className="row" >
-                                            <div class="form-group" style={{ minWidth: "70px", marginRight: "35px" }}>
-                                                <label for="inputStatus">Motoboy</label>
-                                                <select name="motoboysid" id="inputStatus" class="form-control custom-select" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}>
-                                                    <option selected disabled>Selecione</option>
+                                            <div className="form-group" style={{ minWidth: "70px", marginRight: "35px" }}>
+                                                <label htmlFor="inputStatus">Motoboy</label>
+                                                <select name="motoboysid" id="inputStatus" className="form-control custom-select" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}>
+                                                    <option >Selecione</option>
                                                     {motoboys ? motoboys.map((ref, index) => {
                                                         return <option value={ref.id} key={index} >{ref.name}</option>
                                                     }) : <></>}
                                                 </select>
                                             </div>
-                                            <div class="form-group" style={{ minWidth: "100px", marginRight: "35px" }}>
-                                                <label for="inputStatus">Cliente</label>
-                                                <select name="clientid" id="inputStatus" class="form-control custom-select" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}>
-                                                    <option selected disabled>Selecione</option>
+                                            <div className="form-group" style={{ minWidth: "100px", marginRight: "35px" }}>
+                                                <label htmlFor="inputStatus">Cliente</label>
+                                                <select name="clientid" id="inputStatus" className="form-control custom-select" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })}>
+                                                    <option >Selecione</option>
                                                     {clients ? clients.map((ref, index) => {
                                                         return <option value={ref.id} key={index}>{ref.name}</option>
                                                     }) : <></>}
                                                 </select>
                                             </div>
-                                            <div class="form-group" style={{ width: "150px" }}>
-                                                <label for="inputName">Data</label>
-                                                <span class="form-control" className='selectionDate'><DatePicker
+                                            <div className="form-group" style={{ width: "150px" }}>
+                                                <label htmlFor="inputName">Data</label>
+                                                <span className='selectionDate'><DatePicker
                                                     selected={startDate}
                                                     onChange={(date) => { setStartDate(date) }}
                                                     className="form-control"
@@ -229,30 +229,29 @@ export default function Orders() {
 
 
                                         <div className="row">
-                                            <div class="form-group" style={{ width: "70%" }}>
-                                                <label for="inputName">Imagem pedido(s)</label>
-                                                <input name="image" type="text" id="inputName" class="form-control" value={data.image ? data.image : ""} onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                            <div className="form-group" style={{ width: "70%" }}>
+                                                <label htmlFor="inputName">Imagem pedido(s)</label>
+                                                <input name="image" type="text" id="inputName" className="form-control" value={data.image ? data.image : ""} onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                             </div>
-                                            <div class="form-group" style={{ marginLeft: "5%", width: "20%" }}>
-                                                <label for="inputName">Quantidade</label>
-                                                <input name="qtd" value={data.qtd ? data.qtd : ""} type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                            <div className="form-group" style={{ marginLeft: "5%", width: "20%" }}>
+                                                <label htmlFor="inputName">Quantidade</label>
+                                                <input name="qtd" value={data.qtd ? data.qtd : ""} type="text" id="inputName" className="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                             </div>
                                         </div>
-                                        <div class="form-group" style={{ width: "90%" }}>
-                                            <label for="inputProjectLeader">Observação</label>
-                                            <input name="observation" type="text" id="inputProjectLeader" class="form-control" value={data.observation ? data.observation : ""} onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                        <div className="form-group" style={{ width: "90%" }}>
+                                            <label htmlFor="inputProjectLeader">Observação</label>
+                                            <input name="observation" type="text" id="inputProjectLeader" className="form-control" value={data.observation ? data.observation : ""} onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
 
-                                        <div class="form-group" style={{ width: "90%" }}>
-                                            <label for="inputProjectLeader">Numero pedido</label>
-                                            <input name="number" type="text" id="inputProjectLeader" class="form-control" value={data.number ? data.number : ""} onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                        <div className="form-group" style={{ width: "90%" }}>
+                                            <label htmlFor="inputProjectLeader">Numero pedido</label>
+                                            <input name="number" type="text" id="inputProjectLeader" className="form-control" value={data.number ? data.number : ""} onKeyDown={(e) => { if (e.key === "Enter") { sendOrders() } }} onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
-                                        <div class="row">
-                                            <div class="col-12">
+                                        <div className="row" >
+                                            <div className="col-12" >
                                                 <input onClick={() => {
-
                                                     sendOrders()
-                                                }} type="submit" value="Cadastrar pedido" class="btn btn-success float-right" />
+                                                }} type="submit" value="Cadastrar pedido" className="btn btn-success float-right" />
                                             </div>
 
                                         </div>
@@ -263,17 +262,17 @@ export default function Orders() {
                             </div>
 
                         </div>
-                        <div class="row" style={{ width: "50%" }}>
-                            <div class="col-md-6" style={{ minWidth: "100%" }}>
-                                <div class="card card-primary">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Cadastro</h3>
+                        <div className="row" style={{ width: "50%" }}>
+                            <div className="col-md-6" style={{ minWidth: "100%" }}>
+                                <div className="card card-primary">
+                                    <div className="card-header">
+                                        <h3 className="card-title">Cadastro</h3>
 
-                                        <div class="card-tools">
+                                        <div className="card-tools">
 
                                         </div>
                                     </div>
-                                    <div class="card-body">
+                                    <div className="card-body">
                                         <MUIDataTable
                                             title={`${QTD_orders} Pedidos`}
                                             data={orders}

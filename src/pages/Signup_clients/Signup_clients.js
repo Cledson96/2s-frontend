@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { postClient, getUsers } from "../../request/request";
 import { Confirmation, Error } from "../../components/modal/modal";
 
-
 export default function Signup_clients() {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
@@ -17,8 +16,6 @@ export default function Signup_clients() {
     const [data, setdata] = useState({});
     const [dataerror, setdataerror] = useState({});
 
-
-    console.log(data)
     function handleForm({ value, name }) {
        
         setdata({
@@ -37,11 +34,11 @@ export default function Signup_clients() {
       };
       
     function client() {
-        console.log(data)
+     
         const post = postClient(data,token)
         post.then(() => { setmodal(true); setdata({}); handleReset() });
         post.catch((ref) => {
-            console.log(ref); if (ref.response.data === "cliente já cadastrado!") { setdataerror(ref.response.data); seterror(true) } else {
+           if (ref.response.data === "cliente já cadastrado!") { setdataerror(ref.response.data); seterror(true) } else {
                 
                 let err = ref.response.data.details.map((refe) => {
                     return (
@@ -67,73 +64,73 @@ export default function Signup_clients() {
             {modal === true ? <Confirmation setmodal={setmodal} ></Confirmation> : <></>}
             <Headers user={user} setnavbar={setnavbar} navbar={navbar} />
             {navbar === true ? <Navbar user={user} /> : <></>}
-            <div class="content-wrapper">
+            <div className="content-wrapper">
 
-                <section class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
+                <section className="content-header">
+                    <div className="container-fluid">
+                        <div className="row mb-2">
+                            <div className="col-sm-6">
                                 <h1>Cadastro de cliente</h1>
                             </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active">Cadastro cliente</li>
+                            <div className="col-sm-6">
+                                <ol className="breadcrumb float-sm-right">
+                                    <li className="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li className="breadcrumb-item active">Cadastro cliente</li>
                                 </ol>
                             </div>
                         </div>
                     </div>
                 </section>
-                <section class="content" style={{ marginLeft: "40px", minHeight: "100vh" }}>
-                    <div class="row">
-                        <div class="col-md-6" style={{ minWidth: "80%" }}>
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Cadastro</h3>
+                <section className="content" style={{ marginLeft: "40px", minHeight: "100vh" }}>
+                    <div className="row">
+                        <div className="col-md-6" style={{ minWidth: "80%" }}>
+                            <div className="card card-primary">
+                                <div className="card-header">
+                                    <h3 className="card-title">Cadastro</h3>
 
-                                    <div class="card-tools">
+                                    <div className="card-tools">
 
                                     </div>
                                 </div>
-                                <div class="card-body">
+                                <div className="card-body">
                                     <div className="row">
-                                        <div class="form-group" style={{ width: "60%" }}>
-                                            <label for="inputName">Nome</label>
-                                            <input value={data.name ? data.name : ""} name="name" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                        <div className="form-group" style={{ width: "60%" }}>
+                                            <label htmlFor="inputName">Nome</label>
+                                            <input value={data.name ? data.name : ""} name="name" type="text"  className="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
-                                        <div class="form-group" style={{ marginLeft: "5%", minWidth: "30%" }} >
-                                            <label for="inputName">CNPJ</label>
-                                            <input value={data.cnpj ? data.cnpj : ""} name="cnpj" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                        <div className="form-group" style={{ marginLeft: "5%", minWidth: "30%" }} >
+                                            <label htmlFor="inputName">CNPJ</label>
+                                            <input value={data.cnpj ? data.cnpj : ""} name="cnpj" type="text"  className="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="inputName">Endereço</label>
-                                        <input name="address" type="text" id="inputName" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                    <div className="form-group">
+                                        <label htmlFor="inputName">Endereço</label>
+                                        <input name="address" type="text"  className="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                     </div>
                                    
 
-                                    <div class="form-group">
-                                        <label for="inputClientCompany">Logo da empresa</label>
-                                        <input name="imagedocument" type="url" id="inputClientCompany" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                    <div className="form-group">
+                                        <label htmlFor="inputClientCompany">Logo da empresa</label>
+                                        <input name="imagedocument" type="url" id="inputClientCompany" className="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                     </div>
                                     <div className="row">
-                                        <div class="form-group" style={{ minWidth: "150px", marginRight: "35px" }}>
-                                            <label for="inputProjectLeader">Telefone Principal</label>
-                                            <input name="phone" type="tel" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                        <div className="form-group" style={{ minWidth: "150px", marginRight: "35px" }}>
+                                            <label htmlFor="inputProjectLeader">Telefone Principal</label>
+                                            <input name="phone" type="tel"  className="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
-                                        <div class="form-group" style={{ minWidth: "150px", marginRight: "35px" }}>
-                                            <label for="inputProjectLeader">Telefone para recado</label>
-                                            <input name="phonecontact" type="tel" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                        <div className="form-group" style={{ minWidth: "150px", marginRight: "35px" }}>
+                                            <label htmlFor="inputProjectLeader">Telefone para recado</label>
+                                            <input name="phonecontact" type="tel"  className="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                         </div>
                                     </div>
-                                    <div class="form-group" style={{ width: "450px" }}>
-                                        <label for="inputProjectLeader">email</label>
-                                        <input name="email" type="email" id="inputProjectLeader" class="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
+                                    <div className="form-group" style={{ width: "450px" }}>
+                                        <label htmlFor="inputProjectLeader">email</label>
+                                        <input name="email" type="email"  className="form-control" onChange={(e) => handleForm({ name: e.target.name, value: e.target.value, })} />
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <input onClick={() => client()} type="submit" value="Cadastrar novo cliente" class="btn btn-success float-right" />
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <input onClick={() => client()} type="submit" value="Cadastrar novo cliente" className="btn btn-success float-right" />
                                         </div>
 
                                     </div>

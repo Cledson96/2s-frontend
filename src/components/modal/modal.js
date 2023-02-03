@@ -13,7 +13,7 @@ export function Confirmation({ setmodal }) {
         </Modal.Header>
 
         <Modal.Footer className='bg-success'>
-          <button onClick={() => { setmodal(false) }} type="button" class="btn  btn-light">OK</button>
+          <button onClick={() => { setmodal(false) }} type="button" className="btn  btn-light">OK</button>
         </Modal.Footer>
       </Modal.Dialog>
     </div>
@@ -48,7 +48,7 @@ export function Error({ seterror, dataerror }) {
 
         </Modal.Body>
         <Modal.Footer className='bg-danger'>
-          <button onClick={() => { seterror(false) }} type="button" class="btn  btn-success">OK</button>
+          <button onClick={() => { seterror(false) }} type="button" className="btn  btn-success">OK</button>
         </Modal.Footer>
       </Modal.Dialog>
     </div>

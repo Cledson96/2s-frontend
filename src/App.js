@@ -11,7 +11,6 @@ import Signin from './pages/signin/signin.js';
 import Home from './pages/home/Home.js';
 import Orders from './pages/orders/orders.js';
 import Orders_out from './pages/orders_out/orders_out.js';
-import Orders_day from './pages/orders_day/orders_day.js';
 import Signup_motoboy from './pages/Signup_motoboy/Signup_motoboy.js';
 import Signup_clients from './pages/Signup_clients/Signup_clients.js';
 import Signup_users from './pages/Signup_users/Signup_users.js';
@@ -28,13 +27,12 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/order_entry' element={<Orders />} />
           <Route path='/order_out' element={<Orders_out />} />
-          <Route path='/order_day' element={<Orders_day />} />
           <Route path='/signup_motoboy' element={<Signup_motoboy />} />
           <Route path='/Signup_users' element={<Signup_users />} />
           <Route path='/Signup_client' element={<Signup_clients />} />
           <Route path='/motoboys' element={<Motoboys />} />
-          <Route path='/clients' element={<Clients/>} />
-          <Route path='/motoboys_orders' element={<Motoboys_orders/>} />
+          <Route path='/clients' element={<Clients />} />
+          <Route path='/motoboys_orders' element={<Motoboys_orders />} />
         </Routes>
       </BrowserRouter>
     </>

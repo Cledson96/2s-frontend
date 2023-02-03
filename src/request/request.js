@@ -63,7 +63,7 @@ export function postOrders(body,authorization) {
 }
 
 export function getOrders_filter(body,authorization) {
-  console.log(body)
+
   const promise = axios.post(`${BASE_URL}/orders_filter`, body,{
     headers: {
       authorization
