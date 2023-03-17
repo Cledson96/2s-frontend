@@ -7,7 +7,8 @@
 
 O projeto foi desenvolvido como uma aplicação Full-stack que permite o cadastro de usuários, colaboradores e clientes, e a extração de todas as informações cadastradas em tabelas que podem ser exportadas em CSV para o Excel.
 No projeto é possível cadastrar pedidos, informando qual colaborador será responsável pela entrega, a data de entrada do pedido e o responsável pelo cadastro do pedido. O dashboard permite visualizar quantos pedidos foram feitos em um determinado período de tempo escolhido pelo usuário, apresentando-os em forma de tabela e gráficos. Também é possível visualizar qual entregador fez mais entregas, quem teve mais ausências e quantos pedidos foram feitos para fazer o pagamento. Todas essas informações estão disponíveis para exportação no formato CSV do Excel e os dados são armazenados em um banco de dados gratuito, que pode levar um pouco de tempo para carregar as informações.
-O back-end da aplicação se encontra : `https://github.com/Cledson96/2S-BACKEND.git`
+O back-end da aplicação se encontra : `https://github.com/Cledson96/2S-BACKEND.git`   
+As tecnologias e bibliotecas utilizadas até o momento no front-end são:    
 -React
 -Axios
 -React-router-dom
@@ -23,6 +24,7 @@ O back-end da aplicação se encontra : `https://github.com/Cledson96/2S-BACKEND
 The project was developed as a full-stack application that allows the registration of users, collaborators, and clients, and the extraction of all registered information in tables that can be exported to CSV for Excel.
 In the project, it is possible to register orders, informing which collaborator will be responsible for delivery, the order entry date, and the responsible person for registering the order. The dashboard allows you to see how many orders were placed in a given period of time chosen by the user, presenting them in tables and graphs. It is also possible to see which delivery person made the most deliveries, who had the most absences, and how many orders were placed to make payment. All this information is available for export in CSV format for Excel, and the data is stored in a free database that may take some time to load the information.
 The back-end of the application can be found at: `https://github.com/Cledson96/2S-BACKEND.git`
+The technologies and libraries used so far on the front-end are:    
 -React
 -Axios
 -React-router-dom
