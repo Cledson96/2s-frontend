@@ -9,14 +9,14 @@ O projeto foi desenvolvido como uma aplicação Full-stack que permite o cadastr
 No projeto é possível cadastrar pedidos, informando qual colaborador será responsável pela entrega, a data de entrada do pedido e o responsável pelo cadastro do pedido. O dashboard permite visualizar quantos pedidos foram feitos em um determinado período de tempo escolhido pelo usuário, apresentando-os em forma de tabela e gráficos. Também é possível visualizar qual entregador fez mais entregas, quem teve mais ausências e quantos pedidos foram feitos para fazer o pagamento. Todas essas informações estão disponíveis para exportação no formato CSV do Excel e os dados são armazenados em um banco de dados gratuito, que pode levar um pouco de tempo para carregar as informações.
 O back-end da aplicação se encontra : `https://github.com/Cledson96/2S-BACKEND.git`   
 As tecnologias e bibliotecas utilizadas até o momento no front-end são:    
--React
--Axios
--React-router-dom
--bootstrap
--moment
--mui-datatables
--react-datepicker
--react-google-charts
+-React  
+-Axios  
+-React-router-dom   
+-bootstrap   
+-moment   
+-mui-datatables   
+-react-datepicker   
+-react-google-charts   
 
 
 
