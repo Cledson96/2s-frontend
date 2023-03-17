@@ -48,7 +48,7 @@ The technologies and libraries used so far on the front-end are:
 4. Run the project: `npm start`
 
 ### Deploy
-`https://sistema2s-6m24y4fd4-cledson96.vercel.app/`
+`https://sistema2s-6m24y4fd4-cledson96.vercel.app/`  
 login: 12345678910  
 senha:123456  
 
