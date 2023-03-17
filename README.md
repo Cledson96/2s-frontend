@@ -25,14 +25,14 @@ The project was developed as a full-stack application that allows the registrati
 In the project, it is possible to register orders, informing which collaborator will be responsible for delivery, the order entry date, and the responsible person for registering the order. The dashboard allows you to see how many orders were placed in a given period of time chosen by the user, presenting them in tables and graphs. It is also possible to see which delivery person made the most deliveries, who had the most absences, and how many orders were placed to make payment. All this information is available for export in CSV format for Excel, and the data is stored in a free database that may take some time to load the information.
 The back-end of the application can be found at: `https://github.com/Cledson96/2S-BACKEND.git`
 The technologies and libraries used so far on the front-end are:    
--React
--Axios
--React-router-dom
--bootstrap
--moment
--mui-datatables
--react-datepicker
--react-google-charts
+-React  
+-Axios  
+-React-router-dom   
+-bootstrap   
+-moment   
+-mui-datatables   
+-react-datepicker   
+-react-google-charts   
 
 ## Instalação e Execução
 ### Português
