@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+<h1 align="center"> Sistema de entregas - Project Full stack </h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+## Descrição
+### Português
 
-### `npm start`
+O projeto foi desenvolvido como uma aplicação Full-stack que permite o cadastro de usuários, colaboradores e clientes, e a extração de todas as informações cadastradas em tabelas que podem ser exportadas em CSV para o Excel.
+No projeto é possível cadastrar pedidos, informando qual colaborador será responsável pela entrega, a data de entrada do pedido e o responsável pelo cadastro do pedido. O dashboard permite visualizar quantos pedidos foram feitos em um determinado período de tempo escolhido pelo usuário, apresentando-os em forma de tabela e gráficos. Também é possível visualizar qual entregador fez mais entregas, quem teve mais ausências e quantos pedidos foram feitos para fazer o pagamento. Todas essas informações estão disponíveis para exportação no formato CSV do Excel e os dados são armazenados em um banco de dados gratuito, que pode levar um pouco de tempo para carregar as informações.
+O back-end da aplicação se encontra : `https://github.com/Cledson96/2S-BACKEND.git`
+-React
+-Axios
+-React-router-dom
+-bootstrap
+-moment
+-mui-datatables
+-react-datepicker
+-react-google-charts
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+### Inglês
+The project was developed as a full-stack application that allows the registration of users, collaborators, and clients, and the extraction of all registered information in tables that can be exported to CSV for Excel.
+In the project, it is possible to register orders, informing which collaborator will be responsible for delivery, the order entry date, and the responsible person for registering the order. The dashboard allows you to see how many orders were placed in a given period of time chosen by the user, presenting them in tables and graphs. It is also possible to see which delivery person made the most deliveries, who had the most absences, and how many orders were placed to make payment. All this information is available for export in CSV format for Excel, and the data is stored in a free database that may take some time to load the information.
+The back-end of the application can be found at: `https://github.com/Cledson96/2S-BACKEND.git`
+-React
+-Axios
+-React-router-dom
+-bootstrap
+-moment
+-mui-datatables
+-react-datepicker
+-react-google-charts
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Instalação e Execução
+### Português
+1. Clone este repositório: `git clone https://github.com/Cledson96/2s-frontend.git`
+2. Entre no diretório do projeto: `cd seu-projeto`
+3. Instale as dependências: `npm install`
+4. Execute o projeto: `npm start`
 
-### `npm run build`
+### Inglês
+1. Clone this repository: `git clone https://github.com/Cledson96/2s-frontend.git`
+2. Navigate to the project directory: `cd your-project`
+3. Install dependencies: `npm install`
+4. Run the project: `npm start`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Deploy
+`https://sistema2s-6m24y4fd4-cledson96.vercel.app/`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Como contribuir
+### Português
+Você pode contribuir para este projeto de várias formas, como:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Reportando erros ou bugs
+- Sugerindo novas funcionalidades
+- Corrigindo erros ou implementando novas funcionalidades
+- Escrevendo documentação
 
-### `npm run eject`
+Para contribuir, basta criar uma nova branch com suas alterações e enviar um pull request.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Inglês
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You can contribute to this project in various ways, such as:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Reporting errors or bugs
+Suggesting new features
+Correcting errors or implementing new features
+Writing documentation
+To contribute, simply create a new branch with your changes and send a pull request.
